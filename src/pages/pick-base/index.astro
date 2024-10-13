@@ -15,10 +15,26 @@ import Layout from '@/pages/_layouts/Layout.astro';
     ) as HTMLImageElement;
     const trimButton = document.getElementById(
       'trimButton',
-    ) as HTMLImageElement;
+    ) as HTMLButtonElement;
     const applyTrimButton = document.getElementById(
       'applyTrim',
-    ) as HTMLImageElement;
+    ) as HTMLButtonElement;
+    const nextLink = document.querySelector('.next-link') as HTMLAnchorElement;
+
+    function saveCurrentImage() {
+      localStorage.setItem('baseImage', previewBase.src);
+    }
+
+    // function loadSavedImage() {
+    //   const savedBaseImage = localStorage.getItem('baseImage');
+    //   if (savedBaseImage && previewBase && trimButton) {
+    //     previewBase.onload = () => {
+    //       previewBase.style.display = 'block';
+    //       trimButton.style.display = 'inline-block';
+    //     };
+    //     previewBase.src = savedBaseImage;
+    //   }
+    // }
 
     baseImage?.addEventListener('change', function (event) {
       const file = (event.target as HTMLInputElement).files?.[0];
@@ -30,6 +46,7 @@ import Layout from '@/pages/_layouts/Layout.astro';
           if (trimButton) {
             trimButton.style.display = 'inline-block';
           }
+          saveCurrentImage();
         };
         reader.readAsDataURL(file);
       }
@@ -56,6 +73,16 @@ import Layout from '@/pages/_layouts/Layout.astro';
       }
       applyTrimButton.style.display = 'none';
       trimButton.style.display = 'inline-block';
+      saveCurrentImage();
+    });
+
+    nextLink?.addEventListener('click', function (e) {
+      if (!previewBase.src || previewBase.src === window.location.href) {
+        e.preventDefault();
+        alert('ベース画像を選択してください。');
+      } else {
+        saveCurrentImage();
+      }
     });
   });
 </script>
@@ -79,7 +106,7 @@ import Layout from '@/pages/_layouts/Layout.astro';
   <button id="applyTrim" class="trim-button" style="display: none;">
     適用
   </button>
-  <a href="/pick/oshi" class="next-link">次へ</a>
+  <a href="/pick-oshi" id="next-link" class="next-link">次へ</a>
 </Layout>
 
 <style is:global>
