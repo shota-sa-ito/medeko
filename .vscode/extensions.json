@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "PKief.material-icon-theme",
+    "astro-build.astro-vscode",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "stylelint.vscode-stylelint"
+  ],
+  "unwantedRecommendations": []
+}

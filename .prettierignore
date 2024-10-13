@@ -1,0 +1,19 @@
+# Build output
+dist/
+
+# Astro artifacts
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log*
+tsconfig.tsbuildinfo*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Spell Checker
+/cspell.yml

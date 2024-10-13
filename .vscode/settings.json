@@ -1,0 +1,19 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit"
+  },
+
+  "explorer.compactFolders": false,
+  "explorer.sortOrderLexicographicOptions": "unicode",
+
+  "prettier.documentSelectors": ["**/*.svg", "**/*.astro"],
+
+  "stylelint.validate": ["css", "postcss", "astro"]
+}

@@ -1,0 +1,18 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+ignorePaths:
+  - dist
+  - .astro
+  - node_modules
+  - "*.log*"
+enabledLanguageIds:
+  - "*"
+words:
+  - astro
+  - astrojs
+  - rgba
+  - rushstack
+  - stylelint
+  - tsbuildinfo
+  - tsdoc
+  - tseslint

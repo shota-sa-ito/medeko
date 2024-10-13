@@ -1,0 +1,44 @@
+<script>
+  import './transition/swup';
+</script>
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Meデコ</title>
+  </head>
+
+  <body>
+    <main id="layout-main" class="swup-fade">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    font-family: system-ui, sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+
+  #layout-main {
+    flex-grow: 1;
+  }
+
+  .is-changing .swup-fade {
+    opacity: 1;
+    transition: opacity 240ms ease-in-out;
+  }
+  .is-animating .swup-fade {
+    opacity: 0;
+  }
+</style>
