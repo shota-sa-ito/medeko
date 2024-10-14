@@ -1,7 +1,5 @@
-import cloudflare from '@astrojs/cloudflare';
-import db from '@astrojs/db';
-import node from '@astrojs/node';
 import solidJs from '@astrojs/solid-js';
+import vercel from '@astrojs/vercel/serverless';
 import { defineConfig } from 'astro/config';
 import styleX from 'vite-plugin-stylex';
 
@@ -11,14 +9,14 @@ import styleX from 'vite-plugin-stylex';
 export default defineConfig({
   output: 'hybrid',
 
-  adapter: node({ mode: 'middleware' }),
+  adapter: vercel(),
 
   integrations: [
     /**
      * @npm {@link https://docs.astro.build/ja/guides/astro-db} Documents
      * @npm {@link https://www.npmjs.com/package/@astrojs/db} npm
      */
-    db(),
+    // db(),
 
     /**
      * @npm {@link https://docs.astro.build/en/guides/integrations-guide/solid-js} Documents
@@ -28,6 +26,10 @@ export default defineConfig({
   ],
 
   vite: {
+    ssr: {
+      noExternal: ['@astrojs/solid-js/server.js'],
+    },
+
     plugins: [
       /**
        * @npm {@link https://github.com/HorusGoul/vite-plugin-stylex#readme} Documents

@@ -1,53 +1,37 @@
 ---
-import Button from '@/pages/_components/Button';
+import { Image } from 'astro:assets';
 import Layout from '@/pages/_layouts/Layout.astro';
+import Logo from '../../../public/logo.png';
+import StartButtonPng from './_images/start-button.png';
 ---
 
 <Layout>
-  <h1 class="title">Meデコ</h1>
+  <h1 class="logo">
+    <Image src={Logo} alt="Meデコ" />
+  </h1>
 
-  <a class="next-link" href="/pick-inner">デコる</a>
-
-  <Button client:idle />
+  <a class="link" href="/pick-inner">
+    <img class="link-img" src={StartButtonPng.src} alt="Meデコ" />
+  </a>
 </Layout>
 
-<style is:global>
-  #layout-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+<style>
+  .link {
+    text-decoration: none;
+  }
+
+  .logo {
+    width: 80%;
+    max-width: 300px;
     height: 100%;
   }
-</style>
 
-<style>
-  .title {
-    font-size: 2rem;
-    text-align: center;
+  .link {
+    display: block;
+    margin: 0 auto;
   }
 
-  .next-link {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color: white;
-    text-decoration: none;
-    background-color: #4caf50;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  .next-link:hover {
-    background-color: #45a049;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-  }
-
-  .next-link:active {
-    background-color: #3e8e41;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transform: translateY(0);
+  .link-img {
+    height: 80px;
   }
 </style>

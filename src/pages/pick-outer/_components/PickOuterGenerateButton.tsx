@@ -1,9 +1,9 @@
-import { useStore } from '@nanostores/solid';
 import {
   selectedInnerImageStore,
   selectedOuterImageStore,
 } from '@/pages/_states/selected-image';
 import { createCropperBlob } from '@/pages/_utils/cropper';
+import { actions } from 'astro:actions';
 
 export function PickOuterGenerateButton() {
   const generate = async () => {
@@ -28,7 +28,10 @@ export function PickOuterGenerateButton() {
     console.log('outerBlob', outerBlob);
 
     // 画像生成処理
-    // await generate ...
+    await actions.generateDecoImage({
+      inner: innerBlob,
+      outer: outerBlob,
+    });
   };
 
   return <button onClick={generate}>作成する</button>;

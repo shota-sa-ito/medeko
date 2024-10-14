@@ -3,9 +3,6 @@ import { db, DecoImage } from 'astro:db';
 import { z } from 'astro:schema';
 
 export default {
-  /**
-   * Save a deco image.
-   */
   saveDecoImage: defineAction({
     input: z.object({
       url: z.string(),

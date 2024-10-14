@@ -1,6 +1,7 @@
 import SwupBodyClassPlugin from '@swup/body-class-plugin';
 import SwupHeadPlugin from '@swup/head-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
+import SwupScriptsPlugin from '@swup/scripts-plugin';
 import Swup from 'swup';
 
 /**
@@ -10,6 +11,7 @@ import Swup from 'swup';
 window.swup = new Swup({
   plugins: [
     new SwupHeadPlugin(),
+    new SwupScriptsPlugin(),
     new SwupPreloadPlugin(),
     new SwupBodyClassPlugin(),
   ],

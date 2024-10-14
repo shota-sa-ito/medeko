@@ -12,8 +12,9 @@ words:
   - astrojs
   - cropend
   - cropperjs
+  - openai
   - oshi
-  - Preinitialized
+  - preinitialized
   - rgba
   - rushstack
   - stylelint
@@ -22,4 +23,5 @@ words:
   - tsbuildinfo
   - tsdoc
   - tseslint
-  - Turso
+  - turso
+  - vercel

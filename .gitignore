@@ -4,6 +4,9 @@ dist/
 # Astro artifacts
 .astro/
 
+# Wrangler artifacts
+.vercel/output
+
 # Dependencies
 node_modules/
 
@@ -18,3 +21,4 @@ tsconfig.tsbuildinfo*
 # OS files
 .DS_Store
 Thumbs.db
+.vercel
