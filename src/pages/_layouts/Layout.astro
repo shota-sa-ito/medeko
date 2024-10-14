@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <main id="layout-main" class="swup-fade">
+    <main id="layout-main" class="swup-slide">
       <slot />
     </main>
   </body>
@@ -52,11 +52,26 @@
     height: 100%;
   }
 
-  .is-changing .swup-fade {
+  html.is-changing .swup-slide {
     opacity: 1;
-    transition: opacity 240ms ease-in-out;
+    transition-timing-function: ease-in-out;
+    transition-duration: 400ms;
+    transition-property: opacity, transform;
+    transform: translate3d(0, 0, 0);
   }
-  .is-animating .swup-fade {
+
+  html.is-animating .swup-slide {
     opacity: 0;
+    transform: translate3d(0, 60px, 0);
+  }
+  html.is-animating.is-popstate .swup-slide {
+    transform: translate3d(0, -60px, 0);
+  }
+
+  html.is-animating.is-leaving .swup-slide {
+    transform: translate3d(0, -60px, 0);
+  }
+  html.is-animating.is-leaving.is-popstate .swup-slide {
+    transform: translate3d(0, 60px, 0);
   }
 </style>
