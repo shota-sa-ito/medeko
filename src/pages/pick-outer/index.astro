@@ -1,0 +1,11 @@
+---
+import Layout from '@/pages/_layouts/Layout.astro';
+import ImageSelector from '../_components/ImageSelector';
+import { PickOuterGenerateButton } from './_components/PickOuterGenerateButton';
+---
+
+<Layout>
+  <h1>推し画像を選択してください</h1>
+  <ImageSelector client:load type="outer" />
+  <PickOuterGenerateButton client:idle />
+</Layout>

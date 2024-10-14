@@ -1,11 +1,14 @@
 ---
+import Button from '@/pages/_components/Button';
 import Layout from '@/pages/_layouts/Layout.astro';
 ---
 
 <Layout>
   <h1 class="title">Meデコ</h1>
 
-  <a class="next-link" href="/pick-base">デコる</a>
+  <a class="next-link" href="/pick-inner">デコる</a>
+
+  <Button client:idle />
 </Layout>
 
 <style is:global>

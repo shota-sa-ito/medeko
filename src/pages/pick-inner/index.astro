@@ -1,0 +1,11 @@
+---
+import Layout from '@/pages/_layouts/Layout.astro';
+import ImageSelector from '../_components/ImageSelector';
+import PickInnerNextLink from './_components/PickInnerNextLink';
+---
+
+<Layout>
+  <h1>ベース画像を選択してください</h1>
+  <ImageSelector client:load type="inner" />
+  <PickInnerNextLink client:idle />
+</Layout>

@@ -14,9 +14,14 @@
 
 ## 🍀 推奨開発環境
 
-### Node
+### Runtime
 
-- [Node](https://nodejs.org) v20.17.0
+- [Node](https://nodejs.org) v20.18.x
+- [Bun](https://bun.sh) v1.1.x
+
+### CLI
+
+- [Turso CLI](https://docs.turso.tech/quickstart) v1.0.x
 
 <br>
 
@@ -156,6 +161,7 @@ bun check
 - `/public` ... ビルド時にバンドルされたくない静的ファイルを配置するディレクトリ
 
 - `/src`
+
   - `/pages` ... クライアント側のコードを配置するディレクトリ
 
     - `/_layouts` ... ページコンポーネントで用いられるレイアウトコンポーネントを配置するディレクトリ

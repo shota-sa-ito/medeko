@@ -10,9 +10,16 @@ enabledLanguageIds:
 words:
   - astro
   - astrojs
+  - cropend
+  - cropperjs
+  - oshi
+  - Preinitialized
   - rgba
   - rushstack
   - stylelint
+  - stylex
+  - stylexjs
   - tsbuildinfo
   - tsdoc
   - tseslint
+  - Turso

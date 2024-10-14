@@ -1,0 +1,29 @@
+---
+import Button from '@/pages/_components/Button';
+import Layout from '@/pages/_layouts/Layout.astro';
+---
+
+<script>
+  export const data = {
+    title: 'Result',
+    description: 'This is the result page',
+  };
+</script>
+
+<Layout>
+  <h1>Result</h1>
+
+  <p>This is the result page</p>
+
+  <Button />
+</Layout>
+
+<style is:global>
+  #layout-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+</style>
