@@ -24,10 +24,6 @@ export function PickOuterGenerateButton() {
       return;
     }
 
-    // DEBUG
-    console.log('innerBlob', innerArrayBuffer);
-    console.log('outerBlob', outerArrayBuffer);
-
     // 画像生成処理
     const decoImage = await actions.generateDecoImage({
       inner: innerArrayBuffer,
