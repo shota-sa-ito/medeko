@@ -5,7 +5,41 @@ import { PickOuterGenerateButton } from './_components/PickOuterGenerateButton';
 ---
 
 <Layout>
-  <h1>推し画像を選択してください</h1>
-  <ImageSelector client:load type="outer" />
-  <PickOuterGenerateButton client:idle />
+  <div class="pick-outer-container">
+    <div class="image-selector">
+      <ImageSelector client:load type="outer" />
+    </div>
+    <PickOuterGenerateButton client:idle />
+  </div>
 </Layout>
+
+<style>
+  .pick-outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  /* スマートフォン用の背景画像 */
+  @media (max-width: 767px) {
+    .pick-outer-container {
+      background-image: url('../pick-outer-bg-sp.png');
+    }
+  }
+
+  /* PC用の背景画像 */
+  @media (min-width: 768px) {
+    .pick-outer-container {
+      background-image: url('../pick-outer-bg-pc.png');
+    }
+  }
+
+  .image-selector {
+    margin-bottom: 40px;
+  }
+</style>
