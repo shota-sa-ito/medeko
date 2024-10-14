@@ -1,0 +1,233 @@
+---
+import Layout from '@/pages/_layouts/Layout.astro';
+import { selectedInnerImageStore } from '@/pages/_states/selected-image';
+import { parts } from './svgParts';
+
+// 内側画像（ベース画像）のBlobを取得
+const innerImageBlob = selectedInnerImageStore.croppedBlob.get();
+// BlobからURLを作成（画像が選択されている場合のみ）
+const baseImageUrl = innerImageBlob
+  ? URL.createObjectURL(innerImageBlob)
+  : null;
+---
+
+<Layout>
+  <div class="container">
+    <div class="image-container">
+      <!-- ベース画像のsrc属性を動的に設定 -->
+      <img id="baseImage" src={baseImageUrl} alt="ベース画像" />
+      <div id="svgContainer"></div>
+    </div>
+    <div class="parts-selector">
+      <h3>パーツを選択</h3>
+      <div class="color-picker">
+        <label>
+          パーツの色：
+          <input type="color" id="partColor" value="#ff0000" />
+        </label>
+      </div>
+      <div class="parts-list">
+        {
+          parts.map((part, index) => (
+            <button class="part-button" data-part-index={index}>
+              {part.type === 'svg' ? (
+                <svg width="24" height="24" viewBox="0 0 72 72">
+                  <g transform="scale(0.33)">
+                    <g set:html={part.content('#ff0000')} />
+                  </g>
+                </svg>
+              ) : (
+                <img
+                  src={part.content('')}
+                  alt={part.name}
+                  width="24"
+                  height="24"
+                />
+              )}
+              <span>{part.name}</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { selectedInnerImageStore } from '@/pages/_states/selected-image';
+  import {
+    createImageWithRotateHandle,
+    createSVGWithRotateHandle,
+  } from '@/utils/svgUtils';
+  import { parts } from './svgParts';
+
+  // 内側画像（ベース画像）のBlobを取得
+  const innerImageBlob = selectedInnerImageStore.croppedBlob.get();
+  console.log('innerBlob', innerImageBlob);
+  // BlobからURLを作成（画像が選択されている場合のみ）
+  // const baseImageUrl = innerImageBlob
+  //   ? URL.createObjectURL(innerImageBlob)
+  //   : null;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const svgContainer = document.getElementById(
+      'svgContainer',
+    ) as HTMLDivElement | null;
+    const baseImage = document.getElementById('baseImage') as HTMLImageElement;
+    console.log('baseImage.src:', baseImage.src);
+    const partButtons =
+      document.querySelectorAll<HTMLButtonElement>('.part-button');
+    const colorPicker = document.getElementById(
+      'partColor',
+    ) as HTMLInputElement;
+
+    // ベース画像のURLが設定されていない場合のみ、ローカルストレージから読み込む
+    if (!baseImage.src) {
+      const savedBaseImage = localStorage.getItem('baseImage');
+      if (savedBaseImage) {
+        baseImage.src = savedBaseImage;
+      }
+    }
+
+    // パーツボタンにクリックイベントリスナーを追加
+    partButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const partIndex = button.getAttribute('data-part-index');
+        if (partIndex !== null && svgContainer) {
+          const part = parts[parseInt(partIndex)];
+          const color = colorPicker.value;
+          let wrapper;
+          if (part.type === 'svg') {
+            const svgContent = part.content(color);
+            wrapper = createSVGWithRotateHandle(svgContent);
+          } else {
+            const imageSrc = part.content('');
+            wrapper = createImageWithRotateHandle(imageSrc);
+          }
+          svgContainer.appendChild(wrapper);
+        }
+      });
+    });
+
+    // カラーピッカーの変更イベントリスナーを追加
+    colorPicker.addEventListener('change', () => {
+      const color = colorPicker.value;
+      partButtons.forEach((button, index) => {
+        const part = parts[index];
+        if (part.type === 'svg') {
+          const svg = button.querySelector('svg');
+          if (svg) {
+            svg.innerHTML = `
+              <g transform="scale(0.33)">
+                <g>${part.content(color)}</g>
+              </g>
+            `;
+          }
+        }
+      });
+    });
+
+    // コンテナのクリックイベントリスナーを追加
+    svgContainer?.addEventListener('mousedown', (e) => {
+      if (e.target === svgContainer) {
+        console.log('コンテナがクリックされました');
+      }
+    });
+  });
+</script>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+  }
+
+  #baseImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #svgContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .svg-selector {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .svg-parts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .svg-part-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px; /* ボタンの幅を固定 */
+    height: 60px; /* ボタンの高さを固定 */
+    padding: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .svg-part-button:hover {
+    background-color: #e0e0e0;
+  }
+
+  .svg-part-button svg {
+    width: 24px; /* SVGのサイズを小さく */
+    height: 24px;
+  }
+
+  .svg-part-button span {
+    margin-top: 3px;
+    font-size: 0.7rem;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .draggable-svg {
+    transition:
+      width 0.2s ease,
+      height 0.2s ease;
+  }
+
+  /* ドラッグ中のSVG要素のスタイル */
+  .draggable-svg.dragging {
+    z-index: 10; /* 最前面に表示 */
+    width: 120px !important; /* 元のサイズの1.2倍 */
+    height: 120px !important; /* 元のサイズの1.2倍 */
+  }
+</style>
+
+<script>
+  // クリーンアップ関数（URLの解放）
+  function revokeObjectURL(url: string) {
+    if (url && url.startsWith('blob:')) URL.revokeObjectURL(url);
+  }
+
+  // コンポーネントがアンマウントされる際にURLを解放
+  document.addEventListener('astro:unmount', () => {
+    const baseImage = document.getElementById('baseImage') as HTMLImageElement;
+    revokeObjectURL(baseImage.src);
+  });
+</script>
