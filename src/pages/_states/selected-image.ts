@@ -8,7 +8,7 @@ export interface SelectedImageStore {
   previewUrl: Atom<string | null>;
   history: Atom<Cropper.Data[]>;
   historyIndex: Atom<number>;
-  croppedBlob: Atom<Blob | null>;
+  croppedArrayBuffer: Atom<ArrayBuffer | null>;
 }
 
 export const selectedInnerImageStore: SelectedImageStore = {
@@ -16,7 +16,7 @@ export const selectedInnerImageStore: SelectedImageStore = {
   previewUrl: atom(null),
   history: atom([]),
   historyIndex: atom(-1),
-  croppedBlob: atom(null),
+  croppedArrayBuffer: atom(null),
 };
 
 export const selectedOuterImageStore: SelectedImageStore = {
@@ -24,5 +24,5 @@ export const selectedOuterImageStore: SelectedImageStore = {
   previewUrl: atom(null),
   history: atom([]),
   historyIndex: atom(-1),
-  croppedBlob: atom(null),
+  croppedArrayBuffer: atom(null),
 };

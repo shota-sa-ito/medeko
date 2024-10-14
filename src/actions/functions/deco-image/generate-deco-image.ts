@@ -5,8 +5,8 @@ import { openai } from '@/pages/_utils/openai';
 export default {
   generateDecoImage: defineAction({
     input: z.object({
-      inner: z.instanceof(Blob),
-      outer: z.instanceof(Blob),
+      inner: z.any(),
+      outer: z.any(),
     }),
 
     async handler({ inner, outer }) {

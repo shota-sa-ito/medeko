@@ -46,4 +46,16 @@ export default defineConfig({
       },
     },
   },
+
+  experimental: {
+    env: {
+      schema: {
+        OPENAI_API_KEY: {
+          type: 'string',
+          context: 'server',
+          access: 'secret',
+        },
+      },
+    },
+  },
 });

@@ -1,5 +1,5 @@
 import { selectedInnerImageStore } from '@/pages/_states/selected-image';
-import { createCropperBlob } from '@/pages/_utils/cropper';
+import { createCropperArrayBuffer } from '@/pages/_utils/cropper';
 import { useStore } from '@nanostores/solid';
 import * as stylex from '@stylexjs/stylex';
 
@@ -14,9 +14,9 @@ export default function PickInnerNextLink() {
       return;
     }
 
-    // Blob を生成して保存
-    const innerBlob = await createCropperBlob($cropper()!);
-    selectedInnerImageStore.croppedBlob.set(innerBlob);
+    // ArrayBuffer を生成して保存
+    const arrayBuffer = await createCropperArrayBuffer($cropper()!);
+    selectedInnerImageStore.croppedArrayBuffer.set(arrayBuffer);
   };
 
   return (

@@ -1,8 +1,14 @@
 /**
  * Cropper から Blob を生成する
  */
-export function createCropperBlob(cropper: Cropper) {
-  return new Promise<Blob | null>((resolve) => {
-    cropper.getCroppedCanvas().toBlob(resolve);
+export function createCropperArrayBuffer(cropper: Cropper) {
+  return new Promise<ArrayBuffer | null>((resolve) => {
+    cropper
+      .getCroppedCanvas()
+      .toBlob((blob) =>
+        blob
+          ? blob.arrayBuffer().then((buffer) => resolve(buffer))
+          : resolve(null),
+      );
   });
 }
